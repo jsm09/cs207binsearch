@@ -46,4 +46,13 @@ def test_needle_int_array_float():
 def test_string_upper_lower():
     assert binary_search(['a','b','c'],'A') == -1
 
+# Tests based on placement of left and right
+
+def test_left_right_same():
+    assert binary_search(list(range(10)),3,left = -1, right = -1) == -1
+def test_out_of_range():
+    assert binary_search(list(range(10)),3,left = 20, right = -1) == -1
+def test_needle_not_between_left_right():
+    assert binary_search(list(range(10)),3,left = 5, right = 8) == -1
+
 # py.test --doctest-modules --cov --cov-report term-missing binsearch.py test_binsearch.py
