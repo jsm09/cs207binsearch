@@ -24,7 +24,7 @@ def test_nan_in_list():
 def test_inf_in_list():
     assert binary_search([2,float('Inf'),5,7,9],5) == 2
 def test_floats_and_ints():
-    assert binary_search([2,3.5,6,float64(34),float(56),float(87),98],34) == 3
+    assert binary_search([2,3.5,6,float(34),float(56),float(87),98],34) == 3
 def test_strings():
     assert binary_search(['alice','ben','ceyon','david','esther'],'ben') == 1
 
@@ -44,6 +44,6 @@ def test_needle_float_array_int():
 def test_needle_int_array_float():
     assert binary_search([1.0,2.0,3.0,4,5],3) == 2
 def test_string_upper_lower():
-    assert binary_search(['a','b','c'],'A') == 1
+    assert binary_search(['a','b','c'],'A') == -1
 
 # py.test --doctest-modules --cov --cov-report term-missing binsearch.py test_binsearch.py
