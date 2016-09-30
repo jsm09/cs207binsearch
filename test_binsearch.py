@@ -1,6 +1,5 @@
 from pytest import raises
 from binsearch import binary_search
-print("testing")
 # Tests based on the length of the array
 def test_empty_list():
     print('it ran!!!')
@@ -49,7 +48,7 @@ def test_string_upper_lower():
 # Tests based on placement of left and right
 
 def test_left_right_same():
-    assert binary_search(list(range(10)),3,left = -1, right = -1) == -1
+    assert binary_search(list(range(10)),3,left = 6, right = 6) == -1
 def test_out_of_range():
     assert binary_search(list(range(10)),3,left = 20, right = -1) == -1
 def test_needle_not_between_left_right():
