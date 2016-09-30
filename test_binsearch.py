@@ -1,8 +1,8 @@
 from pytest import raises
 from binsearch import binary_search
+
 # Tests based on the length of the array
 def test_empty_list():
-    print('it ran!!!')
     assert binary_search([],6) == -1
 def test_one_element_list():
     assert binary_search(['s'],'s') == 0
@@ -45,13 +45,37 @@ def test_needle_int_array_float():
 def test_string_upper_lower():
     assert binary_search(['a','b','c'],'A') == -1
 
+# User inputs strange left/right values
+def test_string_left_right():
+    with raises(TypeError):
+        binary_search(['a','b','c'],'b', left='asda', right='fsdf')
+def test_string_left_in_array():
+    with raises(TypeError):
+        binary_search(['a','b','c'],'a',left='a',right = 'c')
+def test_string_float():
+    with raises(TypeError):
+        binary_search(['a','b','c'],'a',left=0.0,right = 2.0)
+
+
 # Tests based on placement of left and right
 
 def test_left_right_same():
     assert binary_search(list(range(10)),3,left = 6, right = 6) == -1
-def test_out_of_range():
+def test_left_out_of_range():
     assert binary_search(list(range(10)),3,left = 20, right = -1) == -1
+def test_right_out_of_range():
+    with raises(IndexError):
+        binary_search(['a','b','c'],'a',left=1,right = 5)
+def test_left_right_out_of_range():
+    with raises(IndexError):
+        binary_search(['a','b','c'],'a',left=10,right = 15)
 def test_needle_not_between_left_right():
     assert binary_search(list(range(10)),3,left = 5, right = 8) == -1
+def test_left_right_same_as_needle():
+    assert binary_search(list(range(10)),5,left=5,right=5) == 5
+def test_left_higher_than_right():
+    binary_search(list(range(10)),5,left=6,right=5) == -1
+def test_left_right_switched():
+    binary_search(list(range(10)),5,left=8,right=1) == -1
 
 # py.test --doctest-modules --cov --cov-report term-missing binsearch.py test_binsearch.py
